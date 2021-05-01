@@ -10,7 +10,7 @@ plugins {
     kotlin("plugin.jpa") version "1.4.31"
 }
 
-group = "com.donmgholab"
+group = "com.dongholab"
 version = "${System.currentTimeMillis()}-SNAPSHOT"
 java.sourceCompatibility = JavaVersion.VERSION_1_8
 val swaggerVersion = "3.0.0"
