@@ -1,0 +1,74 @@
+# 공통 설정들
+spring:
+  jackson:
+    serialization:
+      FAIL_ON_EMPTY_BEANS: false
+    property-naming-strategy: LOWER_CAMEL_CASE
+  main:
+    allow-bean-definition-overriding: true
+  servlet:
+    multipart:
+      max-file-size: 20MB
+      max-request-size: 20MB
+  batch:
+    initialize-schema: never
+  flyway:
+    enabled: false
+  jwt:
+    secret: dongho135dongho135dongho135dongho135dongho135dongho135dongho135dongho135dongho135dongho135dongho135dongho135dongho135dongho135dongho135
+band:
+  token: ZQAAAST5hbboKXMBrgiuJ4KQh2vrf68TIBETix0j_IHNkT_tXlF-22CHA4Cw-Q0cTEVV2o7P6pi7bv7_jRYRoCbiGNMRYqTCBK-FG2QMnmXL7_NL
+springdoc:
+  swagger-ui:
+    operations-sorter: method
+    config-url: /api-docs
+    disable-swagger-default-url: false
+  show-actuator: true
+  api-docs:
+    path: /api-docs
+
+springfox:
+  documentation:
+    swagger:
+      v2:
+        path: /v2/api-docs
+
+---
+
+spring:
+  datasource:
+    url: jdbc:mysql://127.0.0.1:3306/test?autoReconnect=true&useUnicode=true&characterEncoding=utf8&serverTimezone=Asia/Seoul
+    username: root
+    password: test
+    initialization-mode: never
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    hikari:
+      connection-test-query: SELECT 1
+  jpa:
+    show-sql: true
+    generate-ddl: false
+    database: mysql
+    hibernate:
+      ddl-auto: none
+      use-new-id-generator-mappings: true
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.MySQL57Dialect
+        format_sql: true
+  r2dbc:
+    url: r2dbc:mariadb://127.0.0.1:3306/test
+    username: root
+    password: test
+    pool:
+      initial-size: 100
+      max-size: 500
+      max-idle-time: 30m
+      validation-query: SELECT 1
+  config:
+    activate:
+      on-profile: local
+
+# bind parameter 로깅 on
+logging.level.org.hibernate.type.descriptor.sql: trace
+logging.level.org.springframework.data.r2dbc: DEBUG
+
