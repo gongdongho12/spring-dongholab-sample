@@ -3,6 +3,7 @@ import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 plugins {
     id("org.springframework.boot") version "2.4.4"
     id("io.spring.dependency-management") version "1.0.11.RELEASE"
+    id("com.expediagroup.graphql") version "4.1.1"
     war
     java
     kotlin("jvm") version "1.4.31"
@@ -10,13 +11,21 @@ plugins {
     kotlin("plugin.jpa") version "1.4.31"
 }
 
-group = "com.dongholab"
+val packageGroup = "com.dongholab"
+group = packageGroup
 version = "${System.currentTimeMillis()}-SNAPSHOT"
 java.sourceCompatibility = JavaVersion.VERSION_1_8
 val swaggerVersion = "3.0.0"
+val graphqlVersion = "4.1.1"
 
 repositories {
     mavenCentral()
+}
+
+graphql {
+    schema {
+        packages = listOf("com.dongholab")
+    }
 }
 
 dependencies {
@@ -26,7 +35,8 @@ dependencies {
     implementation("org.springframework.boot:spring-boot-starter-webflux")
     implementation("org.springframework.boot:spring-boot-starter-thymeleaf")
     implementation("org.springframework.boot:spring-boot-starter-security")
-//    implementation("io.jsonwebtoken:jjwt:0.11.2")
+    implementation("org.springframework.boot:spring-boot-starter-validation")
+
     implementation("io.jsonwebtoken:jjwt-api:0.11.2")
     runtimeOnly("io.jsonwebtoken:jjwt-impl:0.11.2")
     runtimeOnly("io.jsonwebtoken:jjwt-jackson:0.11.2")
@@ -35,7 +45,10 @@ dependencies {
     implementation("io.springfox:springfox-boot-starter:${swaggerVersion}") {
         // spring-boot-starter-data-rest의 버전이 호환되지 않기에 exclude 처리
         exclude("org.springframework.boot", "spring-boot-starter-data-rest")
+        // 여기서 모듈 중첩
+        exclude("io.github.classgraph", "classgraph")
     }
+    implementation("io.github.classgraph:classgraph:4.8.103")
     implementation("com.fasterxml.jackson.module:jackson-module-kotlin")
     implementation("io.projectreactor.kotlin:reactor-kotlin-extensions")
     implementation("org.jetbrains.kotlin:kotlin-reflect")
@@ -43,9 +56,19 @@ dependencies {
     implementation("org.jetbrains.kotlinx:kotlinx-coroutines-reactor")
     implementation("org.mariadb:r2dbc-mariadb:1.0.1")
     implementation("mysql:mysql-connector-java")
+
+    implementation("com.expediagroup:graphql-kotlin-spring-server:${graphqlVersion}")
+    implementation("com.expediagroup:graphql-kotlin-hooks-provider:${graphqlVersion}")
+
     developmentOnly("org.springframework.boot:spring-boot-devtools")
     testImplementation("org.springframework.boot:spring-boot-starter-test")
     testImplementation("io.projectreactor:reactor-test")
+}
+
+graphql {
+    schema {
+        packages = listOf(packageGroup)
+    }
 }
 
 tasks.withType<KotlinCompile> {
