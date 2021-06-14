@@ -16,8 +16,6 @@ spring:
     enabled: false
   jwt:
     secret: dongho135dongho135dongho135dongho135dongho135dongho135dongho135dongho135dongho135dongho135dongho135dongho135dongho135dongho135dongho135
-band:
-  token: ZQAAAST5hbboKXMBrgiuJ4KQh2vrf68TIBETix0j_IHNkT_tXlF-22CHA4Cw-Q0cTEVV2o7P6pi7bv7_jRYRoCbiGNMRYqTCBK-FG2QMnmXL7_NL
 springdoc:
   swagger-ui:
     operations-sorter: method
