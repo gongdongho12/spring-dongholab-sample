@@ -15,6 +15,7 @@ spring:
     enabled: false
   jwt:
     secret: dongho135dongho135dongho135dongho135dongho135dongho135dongho135dongho135dongho135dongho135dongho135dongho135dongho135dongho135dongho135
+
 springdoc:
   swagger-ui:
     operations-sorter: method

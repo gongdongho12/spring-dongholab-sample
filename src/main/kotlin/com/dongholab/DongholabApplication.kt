@@ -24,7 +24,7 @@ import org.springframework.data.r2dbc.repository.config.EnableR2dbcRepositories
 @SpringBootApplication
 @EnableR2dbcRepositories(basePackages = ["com.dongholab.repository.reactive"])
 @EnableJpaRepositories(basePackages = ["com.dongholab.repository.jpa"])
-//@ComponentScan(nameGenerator = CustomBeanNameGenerator::class)
+@ComponentScan(nameGenerator = CustomBeanNameGenerator::class)
 class DongholabApplication: SpringBootServletInitializer() {
 
     override fun configure(application: SpringApplicationBuilder): SpringApplicationBuilder {

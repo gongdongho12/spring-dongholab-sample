@@ -5,11 +5,9 @@ import com.dongholab.repository.jpa.UserRepository
 import org.springframework.security.authentication.InternalAuthenticationServiceException
 import org.springframework.security.core.context.SecurityContextHolder
 import org.springframework.web.bind.annotation.GetMapping
-import org.springframework.web.bind.annotation.RequestMapping
 import org.springframework.web.bind.annotation.RestController
 
-@RestController
-@RequestMapping("/user")
+@RestController("/user")
 class UserController(private val userRepository: UserRepository) {
 
     @GetMapping

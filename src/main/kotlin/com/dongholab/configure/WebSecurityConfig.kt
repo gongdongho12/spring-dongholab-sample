@@ -9,11 +9,13 @@ import org.springframework.context.annotation.Bean
 import org.springframework.context.annotation.Configuration
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder
 import org.springframework.security.config.annotation.web.builders.HttpSecurity
+import org.springframework.security.config.annotation.web.builders.WebSecurity
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter
 import org.springframework.security.config.http.SessionCreationPolicy
 import org.springframework.security.core.userdetails.UserDetailsService
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter
+
 
 @Configuration
 class WebSecurityConfig: WebSecurityConfigurerAdapter() {
@@ -61,5 +63,9 @@ class WebSecurityConfig: WebSecurityConfigurerAdapter() {
         auth!!
             .userDetailsService<UserDetailsService>(customUserDetailsService)
             .passwordEncoder(passwordEncoder())
+    }
+
+    override fun configure(web: WebSecurity) {
+        web.ignoring().antMatchers("/playground").antMatchers("/graphql")
     }
 }
